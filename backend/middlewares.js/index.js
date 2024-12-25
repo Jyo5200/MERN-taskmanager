@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const { ACCESS_TOKEN_SECRET } = process.env;
 
-
 exports.verifyAccessToken = async (req, res, next) => {
 
   const token = req.header("Authorization");

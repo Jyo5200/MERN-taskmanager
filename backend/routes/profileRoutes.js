@@ -6,4 +6,5 @@ const { verifyAccessToken } = require("../middlewares.js");
 // Routes beginning with /api/profile
 router.get("/", verifyAccessToken, getProfile);
 
+
 module.exports = router;
