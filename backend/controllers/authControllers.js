@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const { createAccessToken } = require("../utils/token");
 const { validateEmail } = require("../utils/validation");
 
-
 exports.signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -37,8 +36,6 @@ exports.signup = async (req, res) => {
     return res.status(500).json({ msg: "Internal Server Error" });
   }
 }
-
-
 
 exports.login = async (req, res) => {
   try {
