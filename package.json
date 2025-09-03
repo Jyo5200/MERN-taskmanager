@@ -1,21 +1,12 @@
 {
-  "name": "mern-task-manager",
+  "name": "fake-task-manager-backend",
   "version": "1.0.0",
-  "description": "A MERN application for basic tasks management",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "dev-server": "npm run dev --prefix backend",
-    "dev-client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run dev-server\" \"npm run dev-client\"",
-    "install-all": "npm install && npm install --prefix frontend && npm install --prefix backend",
-    "heroku-postbuild": "npm install --prefix frontend && npm run build --prefix frontend && npm install --prefix backend",
-    "build": "npm install --prefix frontend && npm run build --prefix frontend && npm install --prefix backend",
-    "start": "cd backend && node app.js"
+    "start": "node app.js"
   },
-  "keywords": ["MERN", "Tasks","Task manager", "Full stack application"],
-  "author": "Aayush",
-  "license": "ISC",
-  "devDependencies": {
-    "concurrently": "^7.1.0"
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
   }
 }
