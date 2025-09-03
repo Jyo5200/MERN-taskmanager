@@ -1,39 +1,30 @@
 const express = require("express");
-const cors = require("cors");
-
 const app = express();
-app.use(cors());
+const mongoose = require("mongoose");
+const cors = require("cors");
+require("dotenv").config();
+const authRoutes = require("./routes/authRoutes");
+const taskRoutes = require("./routes/taskRoutes");
+
 app.use(express.json());
+app.use(cors());
 
-// Fake in-memory DB
-let tasks = [];
-let idCounter = 1;
 
-// Routes
-app.get("/", (req, res) => {
-  res.send("✅ Task Manager Backend is Running (Fake DB)");
+const mongoUrl = process.env.MONGODB_URL;
+mongoose.connect(mongoUrl, err => {
+  if (err) throw err;
+  console.log("Mongodb connected...");
 });
 
-app.get("/tasks", (req, res) => {
-  res.json(tasks);
-});
 
-app.post("/tasks", (req, res) => {
-  const task = { id: idCounter++, ...req.body };
-  tasks.push(task);
-  res.json(task);
-});
+app.get("/", (req, res) => res.json({ msg: "Hello from express app" }));
+app.use("/api/auth", authRoutes);
+app.use("/api/tasks", taskRoutes);
 
-app.delete("/tasks/:id", (req, res) => {
-  const { id } = req.params;
-  tasks = tasks.filter((t) => t.id != id);
-  res.json({ message: "Task deleted" });
-});
 
-// Port
-const PORT = process.env.PORT || 10000;
-app.listen(PORT, () => {
-  console.log(`Backend running on port ${PORT}`);
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`Backend is running on port ${port}`);
 });
 
 
